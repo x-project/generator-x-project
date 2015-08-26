@@ -1,0 +1,50 @@
+<link rel="import" href="/components/polymer/polymer.html">
+<link rel="import" href="/components/iron-flex-layout/iron-flex-layout.html">
+<% if (header) {
+%><link rel="import" href="../part-header/part-header.html">
+<% } %><% if (footer) {
+%><link rel="import" href="../part-footer/part-footer.html">
+<% } %><dom-module id="app-page">
+  <style>
+    :host {
+      display: block;
+    }
+
+    #page {
+      @apply(--layout-vertical);
+      min-height: 100vh;
+    }
+
+    #space {
+      @apply(--layout-flex);
+    }
+
+    #header {
+      position: absolute;
+      width: 100%;
+    }
+  </style>
+  <template>
+
+  <div id="page">
+    <% if (header) {
+  %><part-header id="header"></part-header>
+  <% } %><div id="main">
+      <content></content>
+    </div>
+    <div id="space"></div>
+    <% if (footer) {
+  %><part-footer id="footer"></part-footer>
+<% } %></div>
+
+  </template>
+</dom-module>
+<script>
+  Polymer({
+
+    is: 'app-page',
+
+    ready: function () {}
+
+  });
+</script>
