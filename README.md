@@ -1,4 +1,4 @@
-# generator-x-project [![Build Status](https://secure.travis-ci.org/federicospini/generator-x-project.png?branch=master)](https://travis-ci.org/federicospini/generator-x-project)
+# generator-x-project [![Build Status](https://secure.travis-ci.org/federicospini/generator-x-project.png?branch=master)](https://travis-ci.org/x-project/generator-x-project)
 
 > [Yeoman](http://yeoman.io) generator
 
