@@ -5,7 +5,8 @@
 <link rel="import" href="/elements/app-theme/app-theme.html">
 <link rel="import" href="/elements/page-home/page-home.html">
 <% for (var i = 0; i < pages.length; i += 1) {
- %><link rel="import" href="/elements/<%= pages[i] %>/<%= pages[i] %>.html">
+  var name = pages[i].name;
+ %><link rel="import" href="/elements/<%= name %>/<%= name %>.html">
 <% } %><dom-module id="app-boot">
   <style>
     :host {
@@ -19,8 +20,9 @@
     <app-routes id="routes">
       <app-route path="/" page="page-home"></app-route>
       <% for (var i = 0; i < pages.length; i += 1) {
-         var path = pages[i].replace('page-', '');
-      %><app-route path="/<%= path %>" page="<%= pages[i] %>"></app-route>
+         var path = pages[i].label;
+         var name = pages[i].name;
+      %><app-route path="/<%= path %>" page="<%= name %>"></app-route>
     <% } %></app-routes>
 
   </template>

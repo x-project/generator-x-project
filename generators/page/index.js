@@ -49,10 +49,22 @@ module.exports = yeoman.generators.Base.extend({
       //   this.props.page;
       this.props = props;
 
-      // save props
+      // merge general and generator-specific props
+
+      // - appname
+      props.appname = this.config.get('appname');
+
+      // - pages
       props.pages = this.config.get('pages') || [];
-      props.pages.push('page-' + props.name);
+      props.pages.push({
+        name: 'page-' + props.name,
+        label: props.name,
+        inHeader: props.header,
+        inFooter: props.footer
+      });
       this.config.set('pages', props.pages);
+
+      // ensure props consistency
       this.config.save();
 
       done();

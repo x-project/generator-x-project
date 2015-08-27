@@ -46,9 +46,9 @@
         <nav class="nav">
           <ul class="links">
             <% for (var i = 0; i < pages.length; i += 1) {
-               var path = pages[i].replace('page-', '');
-            %><li><a is="app-link" class="link" href="/<%= path %>"><%= path %></a></li>
-          <% } %></ul>
+               if (pages[i].inFooter) {
+            %><li><a is="app-link" class="link" href="/<%= pages[i].label %>"><%= pages[i].label %></a></li>
+          <% }} %></ul>
         </nav>
       </div>
     </footer>

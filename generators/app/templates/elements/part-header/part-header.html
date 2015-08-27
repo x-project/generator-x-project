@@ -7,22 +7,23 @@
       display: block;
       z-index: 100;
     }
-
-    .header {
-      @apply(--layout);
+    #header {
+      @apply(--layout-horizontal);
+      @apply(--layout-justified);
       width: 100%;
       z-index: 100;
     }
-
-    .navbar .links {
+    #brand {
+      @apply(--layout-start-justified);
+    }
+    ul.links {
       @apply(--layout-horizontal);
       @apply(--layout-end-justified);
       list-style: none;
       margin: 0;
       padding: 0;
     }
-
-    .navbar .links a {
+    a.link {
       text-decoration: none;
       display: block;
       padding: 2em 1em;
@@ -35,13 +36,16 @@
   </style>
   <template>
 
-    <div class="container">
-      <nav class="navbar">
+    <div id="header" class="container">
+      <div id="brand">
+        <a is="app-link" class="link" href="/">{{brand}}</a>
+      </div>
+      <nav id="navbar">
         <ul class="links">
           <% for (var i = 0; i < pages.length; i += 1) {
-             var path = pages[i].replace('page-', '');
-          %><li><a is="app-link" class="link" href="/<%= path %>"><%= path %></a></li>
-        <% } %></ul>
+            if (pages[i].inHeader) {
+          %><li><a is="app-link" class="link" href="/<%= pages[i].label %>"><%= pages[i].label %></a></li>
+        <% }} %></ul>
       </nav>
     </div>
 
@@ -54,7 +58,8 @@
 
     properties: {
       brand: {
-        type: String
+        type: String,
+        value: '<%= appname %>'
       }
     }
 

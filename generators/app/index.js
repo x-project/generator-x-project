@@ -18,7 +18,7 @@ module.exports = yeoman.generators.Base.extend({
 
     var prompts = [{
       type: 'input',
-      name: 'name',
+      name: 'appname',
       message: 'What is the ' + chalk.blue('name') + ' of your brand new application?',
       // validate: ... TO DO
       default: defaultAppName
@@ -58,6 +58,14 @@ module.exports = yeoman.generators.Base.extend({
       //   this.props.header;
       //   this.props.footer;
       //   ...
+      props.pages = props.pages.map(function (page) {
+        return {
+          name: page,
+          label: page.replace('page-', ''),
+          inHeader: true,
+          inFooter: true
+        }
+      });
       this.props = props;
 
       // save props
@@ -106,8 +114,9 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: {
     elements: function () {
-      var tmpl = function (el_name) {
-        var path = 'elements/' + el_name + '/' + el_name + '.html';
+      var tmpl = function (item) {
+        var name = item.name ? item.name : item;
+        var path = 'elements/' + name + '/' + name + '.html';
         this.fs.copyTpl(
           this.templatePath(path),
           this.destinationPath(path),
