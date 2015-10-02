@@ -1,0 +1,11 @@
+{
+  "memory": {
+    "name": "memory",
+    "connector": "memory"
+  },
+  "mongo": {
+    "database": "<%= appname %>",
+    "name": "mongo",
+    "connector": "mongodb"
+  }
+}

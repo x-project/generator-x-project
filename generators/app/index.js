@@ -5,6 +5,37 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var path = require('path');
 
+var files = {
+  to_template: [
+    'bower.json',
+    'package.json',
+    'README.md'
+  ],
+  to_copy: [
+    '.bowerrc',
+    '.editorconfig',
+    '.gitignore',
+    '.jshintignore',
+    '.jshintrc',
+    '.npmignore'
+  ]
+};
+
+var tmpl = function (filename) {
+  this.fs.copyTpl(
+    this.templatePath(filename),
+    this.destinationPath(filename),
+    this.answers
+  );
+};
+
+var cpy = function (filename) {
+  this.fs.copy(
+    this.templatePath(filename),
+    this.destinationPath(filename)
+  );
+};
+
 module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
@@ -28,49 +59,40 @@ module.exports = yeoman.generators.Base.extend({
       message: 'What is the ' + chalk.blue('version') + ' of your application?',
       // validate: ... TO DO
       default: '0.0.1'
-    },
-    {
-      type: 'confirm',
-      name: 'header',
-      message: 'Would you like to add a ' + chalk.blue('header') + ' to each page?',
-      default: true
     }, {
-      type: 'confirm',
-      name: 'footer',
-      message: 'Would you like to add a ' + chalk.blue('footer') + ' to each page?',
-      default: true
-    }, {
-      type: 'checkbox',
-      name: 'pages',
-      message: 'Which ' + chalk.blue('pages') + ' do you want to add, alongside the homepage?',
-      choices: [
-        'page-about',
-        'page-privacy',
-        'page-contact',
-      ],
-      default: [
-        'page-contact'
-      ]
+      type: 'input',
+      name: 'description',
+      message: 'Leave a short ' + chalk.blue('description') + ' of your application',
+      // validate: ... TO DO
+      default: 'Another awesome x-project based application.'
     }];
 
-    this.prompt(prompts, function (props) {
-      // to access props later use:
-      //   this.props.header;
-      //   this.props.footer;
+    this.prompt(prompts, function (answers) {
+      // to access answers later use:
+      //   this.answers.appname;
+      //   this.answers.version;
       //   ...
-      props.pages = props.pages.map(function (page) {
-        return {
-          name: page,
-          label: page.replace('page-', ''),
-          inHeader: true,
-          inFooter: true
-        }
-      });
-      this.props = props;
+      this.answers = answers;
 
-      // save props
-      this.config.set(props);
+      // save answers
+      this.config.set(answers);
       this.config.save();
+
+      this.composeWith('app:client', {
+        options: {answers: answers}
+      },
+      {
+        local: require.resolve('./client.js'),
+        link: 'strong'
+      });
+
+      this.composeWith('app:server', {
+        options: {answers: answers}
+      },
+      {
+        local: require.resolve('./server.js'),
+        link: 'strong'
+      });
 
       done();
     }.bind(this));
@@ -78,85 +100,15 @@ module.exports = yeoman.generators.Base.extend({
 
   configuring: {
     app: function () {
-      this.fs.copyTpl(
-        this.templatePath('_package.json'),
-        this.destinationPath('package.json'),
-        this.props
-      );
-
-      this.fs.copyTpl(
-        this.templatePath('_bower.json'),
-        this.destinationPath('bower.json'),
-        this.props
-      );
-
-      this.fs.copy(
-        this.templatePath('_bowerrc'),
-        this.destinationPath('.bowerrc')
-      );
+      files.to_template.forEach(tmpl, this);
     },
 
     projectfiles: function () {
-      this.fs.copy(
-        this.templatePath('editorconfig'),
-        this.destinationPath('.editorconfig')
-      );
-      this.fs.copy(
-        this.templatePath('jshintrc'),
-        this.destinationPath('.jshintrc')
-      );
-      this.fs.copy(
-        this.templatePath('gitignore'),
-        this.destinationPath('.gitignore')
-      );
+      files.to_copy.forEach(cpy, this);
     }
   },
 
-  writing: {
-    elements: function () {
-      var tmpl = function (item) {
-        var name = item.name ? item.name : item;
-        var path = 'elements/' + name + '/' + name + '.html';
-        this.fs.copyTpl(
-          this.templatePath(path),
-          this.destinationPath(path),
-          this.props
-        );
-      }
-
-      var elements = [
-        'app-boot',
-        'app-theme',
-        'app-page',
-        'page-home',
-        'part-jumbotron'
-      ];
-
-      // part-header
-      if (this.props.header) {
-        elements.push('part-header');
-      }
-
-      // part-footer
-      if (this.props.footer) {
-        elements.push('part-footer');
-      }
-
-      // selected elements
-      elements.forEach(tmpl, this)
-
-      // user selected pages
-      this.props.pages.forEach(tmpl, this);
-    },
-
-    index: function () {
-      this.fs.copy(
-        this.templatePath('index.html'),
-        this.destinationPath('index.html')
-      );
-    }
-
-  },
+  writing: {},
 
   install: function () {
     this.installDependencies();

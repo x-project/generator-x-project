@@ -1,0 +1,67 @@
+<link rel="import" href="/components/polymer/polymer.html">
+<link rel="import" href="/components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="/components/app-link/app-link.html">
+<dom-module id="part-header">
+  <style>
+    :host {
+      display: block;
+      z-index: 100;
+    }
+    #header {
+      @apply(--layout-horizontal);
+      @apply(--layout-justified);
+      width: 100%;
+      z-index: 100;
+    }
+    #brand {
+      @apply(--layout-start-justified);
+    }
+    ul.links {
+      @apply(--layout-horizontal);
+      @apply(--layout-end-justified);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    a.link {
+      text-decoration: none;
+      display: block;
+      padding: 2em 1em;
+      color: white;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+  </style>
+  <template>
+
+    <div id="header" class="container">
+      <div id="brand">
+        <a is="app-link" class="link" href="/">{{brand}}</a>
+      </div>
+      <nav id="navbar">
+        <ul class="links">
+          <% for (var i = 0; i < pages.length; i += 1) {
+            if (pages[i].inHeader) {
+          %><li><a is="app-link" class="link" href="/<%= pages[i].label %>"><%= pages[i].label %></a></li>
+        <% }} %></ul>
+      </nav>
+    </div>
+
+  </template>
+</dom-module>
+<script>
+  Polymer({
+
+    is: 'part-header',
+
+    properties: {
+      brand: {
+        type: String,
+        value: '<%= appname %>'
+      }
+    }
+
+  });
+</script>

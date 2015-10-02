@@ -1,0 +1,37 @@
+{
+  "name": "<%= appname %>",
+  "version": "<%= version %>",
+  "description": "<%= description %>",
+  "main": "server/server.js",
+  "preinstall": "bower update",
+  "scripts": {
+    "pretest": "jshint ."
+  },
+  "dependencies": {
+    "cors": "^2.5.2",
+    "loopback": "^2.14.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-connector-mongodb": "^1.10.0",
+    "loopback-datasource-juggler": "^2.19.0",
+    "loopback-ds-timestamp-mixin": "^3.2.2",
+    "errorhandler": "^1.1.1",
+    "morgan": "^1.6.1",
+    "serve-favicon": "^2.0.1"
+  },
+  "optionalDependencies": {
+    "loopback-explorer": "^1.1.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.5.6"
+  },
+  "bundleDependencies": [
+    "compression",
+    "cors",
+    "errorhandler",
+    "loopback",
+    "loopback-boot",
+    "loopback-datasource-juggler",
+    "loopback-explorer",
+    "serve-favicon"
+  ]
+}

@@ -1,0 +1,35 @@
+ ☐ la cartella generators/app/public/fonts è pubblicata e contiene un font i cui diritti di utilizzo devono essere verificati
+
+ ☐ dimensione delle thumbnails richieste dal generatore (o specificabili dal pannello)
+
+
+
+
+
+
+generator-x-project:
+
+generator-x-project-client:
+ ☐ non è stato aggiornato, è un adattamento della primissima versione
+
+
+generator-x-project-server:
+
+generator-x-project-admin:
+  ☐ add admin static routes to server.js
+
+generator-x-project-email:
+ ☐
+
+generator-x-project-iamges:
+
+generator-x-project-images-s3:
+
+generator-x-project-invitable-user:
+
+generator-x-project-blog:
+
+generator-x-project-journal:
+
+generator-x-project-commerce:
+

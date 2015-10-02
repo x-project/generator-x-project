@@ -1,0 +1,15 @@
+{
+  "name": "<%= appname %>",
+  "version": "<%= version %>",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0",
+    "iron-ajax": "PolymerElements/iron-ajax#^1.0",
+    "iron-autogrow-textarea": "PolymerElements/iron-autogrow-textarea#^1.0",
+    "iron-input": "PolymerElements/iron-input#^1.0",
+    "iron-selector": "PolymerElements/iron-selector#~1.0.4",
+    "page": "visionmedia/page.js",
+    "superagent": "cvdlab/superagent",
+    "x-element": "x-element/x-element"
+  },
+  "license": "MIT"
+}
