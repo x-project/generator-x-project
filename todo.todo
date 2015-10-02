@@ -15,6 +15,9 @@ generator-x-project-client:
 
 generator-x-project-server:
 
+generator-x-project-page:
+  ☐  non è stato aggiornato, è un adattamento della primissima versione
+
 generator-x-project-admin:
   ☐ add admin static routes to server.js
 

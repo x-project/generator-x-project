@@ -16,7 +16,8 @@
     "loopback-ds-timestamp-mixin": "^3.2.2",
     "errorhandler": "^1.1.1",
     "morgan": "^1.6.1",
-    "serve-favicon": "^2.0.1"
+    "serve-favicon": "^2.0.1",
+    "compression": "^1.6.0"
   },
   "optionalDependencies": {
     "loopback-explorer": "^1.1.0"
