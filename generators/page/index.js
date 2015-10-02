@@ -76,16 +76,16 @@ module.exports = yeoman.generators.Base.extend({
       this.conflicter.force = true;
       var name = this.props.name;
 
-      var fromPath = 'elements/page-x/page-x.html';
-      var toPath = 'elements/page-' + name + '/page-' + name + '.html';
+      var fromPath = 'public/client/page-x/page-x.html';
+      var toPath = 'public/client/page-' + name + '/page-' + name + '.html';
 
-      var bootToPath = 'elements/app-boot/app-boot.html'
+      var bootToPath = 'public/client/app-boot/app-boot.html'
       var bootFromPath = '../../app/templates/' + bootToPath;
 
-      var headerToPath = 'elements/part-header/part-header.html'
+      var headerToPath = 'public/client/part-header/part-header.html'
       var headerFromPath = '../../app/templates/' + headerToPath;
 
-      var footerToPath = 'elements/part-footer/part-footer.html'
+      var footerToPath = 'public/client/part-footer/part-footer.html'
       var footerFromPath = '../../app/templates/' + footerToPath;
 
 
